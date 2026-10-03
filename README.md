@@ -12,12 +12,15 @@ X-ray -> CLAHE normalise -> Classifier (ResNet18, fracture / no fracture)
                                    '-> if fractured: Segmenter (DeepLabV3) -> fracture-line mask
                                                          |-> relative fracture length (px)
                                                          '-> indicative severity score
-optional: contralateral X-ray -> flip -> ORB registration -> SSIM / mean |diff|   (symmetry check)
 ```
 
 Not built, deliberately: bone density from plain-film pixels (not a validated measure; DXA is the standard),
 absolute fracture length in mm (the JPEGs carry no pixel spacing), and healing-time prediction (no public
 longitudinal data). Severity is a hand-weighted triage score, not an AO/OTA classification.
+
+Tried and removed: a bilateral symmetry check (flip the opposite limb, ORB + affine registration, SSIM). It only
+scored sensibly on a self-mirrored synthetic pair; on the one real same-patient frame in the data its registration
+failed, and no public dataset has real left/right pairs to validate or fix it. It is not part of the pipeline.
 
 ## Layout
 
@@ -27,10 +30,9 @@ src/        all code (flat; modules import each other by name, so run scripts fr
   train_classifier.py train_segmentation.py                          training entry points
   filter_leg_images.py scan_dataset.py                               data preparation / integrity
   poc_report.py infer_demo.py gradcam_audit.py                       evaluation and illustration
-  symmetry_demo.py symmetry_real_case.py                             symmetry-check demonstrations
 data/       README.md only is tracked; datasets are git-ignored (see data/README.md)
 results/    tracked evidence: demo/ (hand-picked panels), heldout_sample/ (seeded held-out sample),
-            symmetry/, logs/, curated_cases.json
+            logs/, curated_cases.json
 outputs/    git-ignored: classifier.pt, segmentation.pt, holdout_files.json (written by training)
 ```
 
@@ -54,9 +56,7 @@ python src/train_segmentation.py --epochs 40     # writes outputs/segmentation.p
 
 python src/poc_report.py --cases results/curated_cases.json --out results/demo       # raw / CLAHE / Grad-CAM / mask panels
 python src/poc_report.py --out results/heldout_sample                                # seeded random held-out cases
-python src/symmetry_demo.py                      # synthetic bilateral pair -> results/symmetry/
-python src/symmetry_real_case.py                 # the one real same-patient pair (IMG0002301)
-python src/infer_demo.py --image path/to/xray.jpg [--contralateral path/to/other_leg.jpg]
+python src/infer_demo.py --image path/to/xray.jpg
 ```
 
 Train/validation membership is a deterministic content hash (`datasets.is_holdout`), shared by both models, so an
@@ -78,10 +78,6 @@ Shortcuts found with Grad-CAM, each partly or fully mitigated:
   cue. They were dropped, but held-out Mendeley normals still false-alarm (one on a printed clinic stamp), so
   cross-dataset generalisation is **unresolved**.
 - **Not tibia-specific**: FracAtlas's `leg` tag includes ankle, foot, knee and pelvis views.
-
-The symmetry check is validated only mechanically: a synthetic pair responds as expected (similarity 1.00 vs 0.85 with a
-12 degree injected deformity), while the one real bilateral frame (`IMG0002301`) gave a near-zero score that reflects a
-registration failure, not a measurement. No public dataset provides real bilateral pairs.
 
 ## AI usage
 

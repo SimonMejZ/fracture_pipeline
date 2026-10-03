@@ -10,6 +10,9 @@ __pycache__/
 venv/
 .ipynb_checkpoints/
 
+# --- Debugging files ---
+gradcam_audit.py
+
 # --- Datasets: large, third-party, licensed. See data/README.md to fetch them. ---
 data/*
 !data/README.md
@@ -20,4 +23,3 @@ outputs/
 *.pt
 *.pth
 
-# results/ is deliberately NOT ignored: small panels, CSVs and logs that back the report.

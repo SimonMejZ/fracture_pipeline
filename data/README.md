@@ -50,8 +50,8 @@ The raw `data/fracatlas/` folder can be deleted afterwards. Known caveats, all v
 ## Not used
 
 The Kaggle *Bone Fracture Multi-Region X-ray Data* set was considered and rejected (binary labels only, no body-region tag, no masks).
-No public dataset found has same-patient left/right pairs or longitudinal follow-up films, which is why the symmetry check
-is only demonstrated (synthetic pair plus one real bilateral frame) and healing-time prediction is not built.
+No public dataset found has same-patient left/right pairs or longitudinal follow-up films, which is why a symmetry check
+could not be validated (and was removed) and healing-time prediction is not built.
 
 ## Notes
 
