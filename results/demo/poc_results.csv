@@ -1,0 +1,12 @@
+file,source,truth,p_fractured,verdict,heldout,pred_mask_px,gt_mask_px,mask_iou,length_ratio,severity
+IMG0002301.jpg,images,fractured,1.0,correct,False,9,191,0.047,0.009,53.3
+IMG0002322.jpg,images,fractured,0.953,correct,False,97,237,0.38,0.05,52.4
+IMG0002430.jpg,images,fractured,0.862,correct,False,106,128,0.49,0.035,47.3
+IMG0003458.jpg,images,fractured,0.953,correct,True,516,382,0.698,0.14,58.6
+IMG0002443.jpg,images,fractured,0.999,correct,False,562,413,0.352,0.076,58.6
+IMG0000028.jpg,images,normal,0.0,correct,False,0,,,0.0,
+IMG0000042.jpg,images,normal,0.0,correct,False,0,,,0.0,
+19.png,tibia_fibula,normal,1.0,FALSE ALARM,True,0,,,0.0,50.0
+255.png,tibia_fibula,fractured,0.998,correct,False,235,,,0.077,58.6
+351.png,tibia_fibula,fractured,1.0,correct,False,0,,,0.0,50.0
+339.png,tibia_fibula,fractured,1.0,correct,False,114,,,0.06,58.1
