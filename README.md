@@ -79,10 +79,6 @@ Shortcuts found with Grad-CAM, each partly or fully mitigated:
   cross-dataset generalisation is **unresolved**.
 - **Not tibia-specific**: FracAtlas's `leg` tag includes ankle, foot, knee and pelvis views.
 
-## AI usage
 
-This coursework is under the AMBER AI policy. The code and write-up were developed with AI assistance (planning,
-scaffolding, wording). Any statistic, licence or product claim used in the presentation must be checked against its
-primary source; do not cite figures from AI output.
 
 Data: Mendeley tibia/fibula set and FracAtlas, both CC BY 4.0, attribution in [`data/README.md`](data/README.md).
