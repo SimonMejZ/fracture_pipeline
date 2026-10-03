@@ -1,0 +1,23 @@
+# --- macOS / editors ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# --- Datasets: large, third-party, licensed. See data/README.md to fetch them. ---
+data/*
+!data/README.md
+
+# --- Generated artefacts: model checkpoints, split manifest (contains absolute paths), scratch ---
+# Regenerate with src/train_classifier.py and src/train_segmentation.py.
+outputs/
+*.pt
+*.pth
+
+# results/ is deliberately NOT ignored: small panels, CSVs and logs that back the report.
